@@ -84,3 +84,8 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.post.pk)
+
+
+def tag_posts(request, tag):
+    posts = Post.objects.filter(tags__name=tag)
+    return render(request, 'blog/tag_posts.html', {'posts': posts})
